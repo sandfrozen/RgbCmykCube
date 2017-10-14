@@ -33,7 +33,7 @@ class ViewController: UIViewController {
         
     }
 
-
+    
     @IBAction func rgbSegmentedAction(_ sender: Any) {
         setUIControls(rgbHidden: rgbSegmentedControl.selectedSegmentIndex == 1)
         
@@ -82,15 +82,15 @@ class ViewController: UIViewController {
     
 }
 
-extension String {
-    func isFloat() -> Bool {
-        return Float(self) != nil
-    }
-}
-
-extension UITextField {
-    func float() -> Float {
-        return self.text!.isFloat() ? Float(text!.self)! : 0.0
-    }
-}
+//extension String {
+//    func isFloat() -> Bool {
+//        return Float(self) != nil
+//    }
+//}
+//
+//extension UITextField {
+//    func float() -> Float {
+//        return self.text!.isFloat() ? Float(text!.self)! : 0.0
+//    }
+//}
 
