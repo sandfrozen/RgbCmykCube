@@ -22,7 +22,17 @@ class CubeViewController: UIViewController {
         super.viewDidAppear(animated)
         sceneSetup()
     }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        sceneView.stop(nil)
+        sceneView.play(nil)
+    }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        sceneView.stop(nil)
+    }
     // MARK: Scene
     func sceneSetup() {
         // 1
@@ -47,39 +57,39 @@ class CubeViewController: UIViewController {
         scene.rootNode.addChildNode(cameraNode)
         
         //2.4
-        let redImage = UIImage.imageWithSize(size: CGSize(width: 255, height: 255), color: UIColor.red)
-        let greImage = UIImage.imageWithSize(size: CGSize(width: 255, height: 255), color: UIColor.green)
-        let bluImage = UIImage.imageWithSize(size: CGSize(width: 255, height: 255), color: UIColor.blue)
-        let yelImage = UIImage.imageWithSize(size: CGSize(width: 255, height: 255), color: UIColor.yellow)
-        let purImage = UIImage.imageWithSize(size: CGSize(width: 255, height: 255), color: UIColor.purple)
-        let oraImage = UIImage.imageWithSize(size: CGSize(width: 255, height: 255), color: UIColor.orange)
+//        let redImage = UIImage.imageWithSize(size: CGSize(width: 255, height: 255), color: UIColor.red)
+//        let greImage = UIImage.imageWithSize(size: CGSize(width: 255, height: 255), color: UIColor.green)
+//        let bluImage = UIImage.imageWithSize(size: CGSize(width: 255, height: 255), color: UIColor.blue)
+//        let yelImage = UIImage.imageWithSize(size: CGSize(width: 255, height: 255), color: UIColor.yellow)
+//        let purImage = UIImage.imageWithSize(size: CGSize(width: 255, height: 255), color: UIColor.purple)
+//        let oraImage = UIImage.imageWithSize(size: CGSize(width: 255, height: 255), color: UIColor.orange)
         // 2.5
 //        let greenMaterial = SCNMaterial()
 //        greenMaterial.diffuse.contents = UIColor.green
 //        greenMaterial.locksAmbientWithDiffuse = true
         
         let redMaterial = SCNMaterial()
-        redMaterial.diffuse.contents = redImage
+        redMaterial.diffuse.contents = UIImageView.init(image: #imageLiteral(resourceName: "cube1"))
         redMaterial.locksAmbientWithDiffuse = true
         
         let greMaterial = SCNMaterial()
-        greMaterial.diffuse.contents = greImage
+        greMaterial.diffuse.contents = UIImageView.init(image: #imageLiteral(resourceName: "cube6")) //cube 6
         greMaterial.locksAmbientWithDiffuse = true
         
         let bluMaterial = SCNMaterial()
-        bluMaterial.diffuse.contents = bluImage
+        bluMaterial.diffuse.contents = UIImageView.init(image: #imageLiteral(resourceName: "cube3"))
         bluMaterial.locksAmbientWithDiffuse = true
         
         let yelMaterial = SCNMaterial()
-        yelMaterial.diffuse.contents = yelImage
+        yelMaterial.diffuse.contents = UIImageView.init(image: #imageLiteral(resourceName: "cube5"))  // cube 5
         yelMaterial.locksAmbientWithDiffuse = true
         
         let purMaterial = SCNMaterial()
-        purMaterial.diffuse.contents = purImage
+        purMaterial.diffuse.contents = UIImageView.init(image: #imageLiteral(resourceName: "cube4")) //cube4
         purMaterial.locksAmbientWithDiffuse = true
         
         let oraMaterial = SCNMaterial()
-        oraMaterial.diffuse.contents = oraImage
+        oraMaterial.diffuse.contents = UIImageView.init(image: #imageLiteral(resourceName: "cube2")) // cube 2
         oraMaterial.locksAmbientWithDiffuse = true
         
         // 2
@@ -93,6 +103,7 @@ class CubeViewController: UIViewController {
         //sceneView.autoenablesDefaultLighting = true
         sceneView.allowsCameraControl = true
     }
+    
 }
 
 
@@ -109,4 +120,5 @@ extension UIImage {
         UIGraphicsEndImageContext()
         return image
     }
+    
 }

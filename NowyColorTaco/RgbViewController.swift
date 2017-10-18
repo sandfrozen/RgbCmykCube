@@ -38,6 +38,8 @@ class RgbViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         self.colorView.layer.cornerRadius = 20
+        self.colorView.layer.borderWidth = 1
+
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
