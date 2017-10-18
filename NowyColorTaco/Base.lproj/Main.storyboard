@@ -17,12 +17,26 @@
                     <view key="view" contentMode="scaleToFill" id="ajU-ro-ArO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" loops="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wmf-ca-KG3">
+                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                            </sceneKitView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Wmf-ca-KG3" firstAttribute="leading" secondItem="kgL-xn-cgp" secondAttribute="leading" id="AyU-WS-21E"/>
+                            <constraint firstItem="kgL-xn-cgp" firstAttribute="bottom" secondItem="Wmf-ca-KG3" secondAttribute="bottom" id="ER3-Sb-jBq"/>
+                            <constraint firstItem="kgL-xn-cgp" firstAttribute="trailing" secondItem="Wmf-ca-KG3" secondAttribute="trailing" id="G2O-5A-reJ"/>
+                            <constraint firstItem="Wmf-ca-KG3" firstAttribute="top" secondItem="kgL-xn-cgp" secondAttribute="top" id="Lub-Qi-Ufk"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="kgL-xn-cgp"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Cube" image="cube" id="BOr-am-ABc">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
                     </tabBarItem>
+                    <connections>
+                        <outlet property="sceneView" destination="Wmf-ca-KG3" id="6Dy-RX-tx1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e11-8l-bEU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -39,7 +53,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="R3s-8c-98w">
                                 <rect key="frame" x="16" y="36" width="343" height="31"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text edit mode: Off" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pxL-YS-qxk">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Auto convert &amp; refresh: Off" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pxL-YS-qxk">
                                         <rect key="frame" x="0.0" y="5.5" width="286" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -65,7 +79,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R60-7O-wIy">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="255" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R60-7O-wIy">
                                         <rect key="frame" x="30" y="0.0" width="70" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="70" id="RoT-fi-lKb"/>
@@ -78,7 +92,7 @@
                                             <outlet property="delegate" destination="jTG-W4-b7H" id="fyD-5b-99C"/>
                                         </connections>
                                     </textField>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="255" translatesAutoresizingMaskIntoConstraints="NO" id="4Zf-RE-sWQ">
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="255" minValue="0.0" maxValue="255" translatesAutoresizingMaskIntoConstraints="NO" id="4Zf-RE-sWQ">
                                         <rect key="frame" x="108" y="0.0" width="237" height="31"/>
                                         <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <connections>
@@ -100,7 +114,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h1r-ig-wrO">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="255" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h1r-ig-wrO">
                                         <rect key="frame" x="30" y="0.0" width="70" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -110,7 +124,7 @@
                                             <outlet property="delegate" destination="jTG-W4-b7H" id="xRV-D3-2o0"/>
                                         </connections>
                                     </textField>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="255" translatesAutoresizingMaskIntoConstraints="NO" id="vcF-9K-F53">
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="255" minValue="0.0" maxValue="255" translatesAutoresizingMaskIntoConstraints="NO" id="vcF-9K-F53">
                                         <rect key="frame" x="108" y="0.0" width="237" height="31"/>
                                         <color key="tintColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <connections>
@@ -132,7 +146,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="p6d-av-gxy">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="255" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="p6d-av-gxy">
                                         <rect key="frame" x="30" y="0.0" width="70" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -142,7 +156,7 @@
                                             <outlet property="delegate" destination="jTG-W4-b7H" id="2Fy-lX-VdD"/>
                                         </connections>
                                     </textField>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="255" translatesAutoresizingMaskIntoConstraints="NO" id="4F1-ey-CGR">
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="255" minValue="0.0" maxValue="255" translatesAutoresizingMaskIntoConstraints="NO" id="4F1-ey-CGR">
                                         <rect key="frame" x="108" y="0.0" width="237" height="31"/>
                                         <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <connections>
@@ -164,7 +178,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.0" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="feZ-lH-9mH">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.00" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="feZ-lH-9mH">
                                         <rect key="frame" x="30" y="0.0" width="70" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -190,8 +204,17 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="o1m-b0-uWX">
                                 <rect key="frame" x="16" y="205" width="343" height="41"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bzM-eQ-WCO">
+                                        <rect key="frame" x="0.0" y="0.0" width="60" height="41"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <state key="normal" title="⬇︎"/>
+                                        <connections>
+                                            <action selector="arrowAction" destination="jTG-W4-b7H" eventType="touchUpInside" id="0Zw-95-cJy"/>
+                                            <action selector="changeArrowAction" destination="Xar-AL-BJ6" eventType="touchUpInside" id="V5M-gK-cbh"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c36-Nv-bde">
-                                        <rect key="frame" x="0.0" y="5.5" width="60" height="30"/>
+                                        <rect key="frame" x="83.5" y="5.5" width="60" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="uXe-LN-w6w"/>
                                         </constraints>
@@ -202,13 +225,11 @@
                                             <action selector="convertAction:" destination="Xar-AL-BJ6" eventType="touchUpInside" id="LBa-8c-owW"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bzM-eQ-WCO">
-                                        <rect key="frame" x="141.5" y="0.0" width="60" height="41"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                        <state key="normal" title="⬇︎"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kk8-Sp-39x">
+                                        <rect key="frame" x="167.5" y="5.5" width="92" height="30"/>
+                                        <state key="normal" title="Refresh color"/>
                                         <connections>
-                                            <action selector="arrowAction" destination="jTG-W4-b7H" eventType="touchUpInside" id="0Zw-95-cJy"/>
-                                            <action selector="changeArrowAction" destination="Xar-AL-BJ6" eventType="touchUpInside" id="V5M-gK-cbh"/>
+                                            <action selector="refreshColorAction:" destination="jTG-W4-b7H" eventType="touchUpInside" id="qFB-V4-tTw"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6af-gh-ahc">
@@ -234,7 +255,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.0" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HDA-Q7-W9X">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.00" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HDA-Q7-W9X">
                                         <rect key="frame" x="30" y="0.0" width="70" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -266,7 +287,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.0" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bYZ-J8-gky">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.00" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bYZ-J8-gky">
                                         <rect key="frame" x="30" y="0.0" width="70" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -298,7 +319,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1.0" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yGh-PU-51j">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1.00" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yGh-PU-51j">
                                         <rect key="frame" x="30" y="0.0" width="70" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -308,7 +329,7 @@
                                             <outlet property="delegate" destination="jTG-W4-b7H" id="rpf-2Y-keC"/>
                                         </connections>
                                     </textField>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="OIV-Lg-Vx3">
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="OIV-Lg-Vx3">
                                         <rect key="frame" x="108" y="0.0" width="237" height="31"/>
                                         <color key="tintColor" cyan="0.0" magenta="0.0" yellow="0.0" black="1" alpha="1" colorSpace="custom" customColorSpace="genericCMYKColorSpace"/>
                                         <connections>
@@ -323,7 +344,7 @@
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MMf-kA-a3X">
                                 <rect key="frame" x="16" y="474.5" width="343" height="127.5"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nowy color taco:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ItW-6u-1ck">
                                 <rect key="frame" x="123" y="438" width="129" height="20.5"/>
@@ -389,7 +410,7 @@
                         <outlet property="bSlider" destination="4F1-ey-CGR" id="8Fb-OS-SfG"/>
                         <outlet property="cField" destination="feZ-lH-9mH" id="vHr-fy-9Wm"/>
                         <outlet property="cSlider" destination="dak-L8-ltg" id="moY-c3-zsM"/>
-                        <outlet property="colortView" destination="MMf-kA-a3X" id="3qM-gF-8m8"/>
+                        <outlet property="colorView" destination="MMf-kA-a3X" id="3qM-gF-8m8"/>
                         <outlet property="gField" destination="h1r-ig-wrO" id="n0P-3G-T27"/>
                         <outlet property="gSlider" destination="vcF-9K-F53" id="aK8-ha-CqG"/>
                         <outlet property="kField" destination="yGh-PU-51j" id="dGC-ga-4i3"/>

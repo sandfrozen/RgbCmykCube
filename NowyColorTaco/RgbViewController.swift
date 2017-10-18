@@ -28,7 +28,7 @@ class RgbViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var arrowButton: UIButton!
     
-    @IBOutlet weak var colortView: UIView!
+    @IBOutlet weak var colorView: UIView!
     
     @IBOutlet weak var textModeLabel: UILabel!
     @IBOutlet weak var textModeSwitch: UISwitch!
@@ -37,7 +37,7 @@ class RgbViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.colortView.layer.cornerRadius = 20
+        self.colorView.layer.cornerRadius = 20
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -50,18 +50,11 @@ class RgbViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func textModeAction() {
-        rField.isEnabled = textModeSwitch.isOn
-        gField.isEnabled = textModeSwitch.isOn
-        bField.isEnabled = textModeSwitch.isOn
-        cField.isEnabled = textModeSwitch.isOn
-        mField.isEnabled = textModeSwitch.isOn
-        yField.isEnabled = textModeSwitch.isOn
-        kField.isEnabled = textModeSwitch.isOn
-        
         if textModeSwitch.isOn {
-            textModeLabel.text = "Text edit mode: On"
+            textModeLabel.text = "Auto convert & refresh: On"
+            
         } else {
-            textModeLabel.text = "Text edit mode: Off"
+            textModeLabel.text = "Auto convert & refresh: Off"
         }
     }
     
@@ -71,6 +64,10 @@ class RgbViewController: UIViewController, UITextFieldDelegate {
         } else {
             convertToCmyk()
         }
+    }
+    
+    @IBAction func refreshColorAction(_ sender: Any) {
+        self.updateColorView()
     }
     
     @IBAction func arrowAction() {
@@ -84,18 +81,18 @@ class RgbViewController: UIViewController, UITextFieldDelegate {
     @IBAction func resetAction() {
         if self.arrowButton.title(for: .normal) == "⬆︎" {
             UIView.animate(withDuration: 0.3, animations: {
-                self.rField.text = "0"
-                self.gField.text = "0"
-                self.bField.text = "0"
-                self.updateRgbs()
+                self.rField.text = "255"
+                self.gField.text = "255"
+                self.bField.text = "255"
+                self.updateRgbSliders()
             }, completion: nil)
         } else {
             UIView.animate(withDuration: 0.3, animations: {
-                self.cField.text = "0"
-                self.mField.text = "0"
-                self.yField.text = "0"
-                self.kField.text = "1"
-                self.updateCmyks()
+                self.cField.text = "0.00"
+                self.mField.text = "0.00"
+                self.yField.text = "0.00"
+                self.kField.text = "0.00"
+                self.updateCmykSliders()
             }, completion: nil)
         }
         self.updateColorView()
@@ -124,7 +121,10 @@ class RgbViewController: UIViewController, UITextFieldDelegate {
                 break
             }
         }, completion: nil)
-        self.updateColorView()
+        if textModeSwitch.isOn {
+            self.updateColorView()
+        }
+        
     }
     
     @IBAction func cmykTextChanged(_ sender: Any) {
@@ -132,9 +132,9 @@ class RgbViewController: UIViewController, UITextFieldDelegate {
         // Check value
         if let value = field.float() {
             if value < 0 {
-                field.text = "0.0"
+                field.text = "0.00"
             } else if value > 1 {
-                field.text = "1.0"
+                field.text = "1.00"
             }
         }
         // Update slider
@@ -152,7 +152,9 @@ class RgbViewController: UIViewController, UITextFieldDelegate {
                 break
             }
         }, completion: nil)
-        self.updateColorView()
+        if textModeSwitch.isOn {
+            self.updateColorView()
+        }
     }
     
     @IBAction func rgbSliderChanged(_ sender: Any) {
@@ -168,8 +170,10 @@ class RgbViewController: UIViewController, UITextFieldDelegate {
         default:
             break
         }
-        self.convertToCmyk()
-        self.updateColorView()
+        if textModeSwitch.isOn {
+            self.convertToCmyk()
+            self.updateColorView()
+        }
     }
     
     @IBAction func cmykSliderChanged(_ sender: Any) {
@@ -187,8 +191,10 @@ class RgbViewController: UIViewController, UITextFieldDelegate {
         default:
             break
         }
-        self.convertToRgb()
-        self.updateColorView()
+        if textModeSwitch.isOn {
+            self.convertToRgb()
+            self.updateColorView()
+        }
     }
     
     private func convertToRgb() {
@@ -201,7 +207,7 @@ class RgbViewController: UIViewController, UITextFieldDelegate {
         self.gField.text = String(Int(round(g*255)))
         self.bField.text = String(Int(round(b*255)))
         
-        self.updateRgbs()
+        self.updateRgbSliders()
     }
     
     private func convertToCmyk() {
@@ -220,16 +226,16 @@ class RgbViewController: UIViewController, UITextFieldDelegate {
         self.mField.text = String(format: "%.02f", m)
         self.yField.text = String(format: "%.02f", y)
         
-        self.updateCmyks()
+        self.updateCmykSliders()
     }
     
-    private func updateRgbs() {
+    private func updateRgbSliders() {
         self.rgbTextChanged(rField)
         self.rgbTextChanged(gField)
         self.rgbTextChanged(bField)
     }
     
-    private func updateCmyks() {
+    private func updateCmykSliders() {
         self.cmykTextChanged(kField)
         self.cmykTextChanged(cField)
         self.cmykTextChanged(mField)
@@ -237,10 +243,19 @@ class RgbViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func updateColorView () {
-        let r = self.rField.float()/255
-        let g = self.gField.float()/255
-        let b = self.bField.float()/255
-        self.colortView.backgroundColor = UIColor(red: CGFloat(r), green: CGFloat(g), blue: CGFloat(b), alpha: 1.0)
+        if self.arrowButton.title(for: .normal) == "⬇︎" {
+            let r = 1 - min(1, (self.cField.float()*(1-self.kField.float())) + self.kField.float())
+            let g = 1 - min(1, (self.mField.float()*(1-self.kField.float())) + self.kField.float())
+            let b = 1 - min(1, (self.yField.float()*(1-self.kField.float())) + self.kField.float())
+            
+            self.colorView.backgroundColor = UIColor(red: CGFloat(r), green: CGFloat(g), blue: CGFloat(b), alpha: 1.0)
+        } else {
+            let r = self.rField.float()/255
+            let g = self.gField.float()/255
+            let b = self.bField.float()/255
+            
+            self.colorView.backgroundColor = UIColor(red: CGFloat(r), green: CGFloat(g), blue: CGFloat(b), alpha: 1.0)
+        }
     }
 }
 
@@ -270,6 +285,6 @@ extension UISlider {
     }
     
     func string() -> String {
-        return self.value == 1.0 || self.value == 0.0 ? String(format: "%.01f", self.value) : String(format: "%.02f", self.value)
+        return String(format: "%.02f", self.value)
     }
 }
